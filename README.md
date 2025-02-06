@@ -1,3 +1,5 @@
+![Arsitektur](arsitektur.png)
+
 # cloudsync
 Based RClone for Linux Manjaro i3wm
 
