@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Rclone Manager
+Comment=Google Drive Mount Manager
+Exec=/path/to/mount_manager.sh
+Icon=cloud
+Terminal=false
+Type=Application
+Categories=Utility;
