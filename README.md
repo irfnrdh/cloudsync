@@ -16,13 +16,13 @@ mkdir -p ~/Cloud/gdrive{1,2,3}
 
 ```
 chmod +x mount_manager.sh
-systemctl --user enable rclone@gdrive1.service
+systemctl --user enable cloudsync@gdrive1.service
 ```
 
 ### Debug
 
 ```
-journalctl --user-unit rclone@gdrive1.service  # Cek log service
+journalctl --user-unit cloudsync@gdrive1.service  # Cek log service
 lsblk  # Cek mount points
 rclone ls gdrive1:  # Test koneksi
 ```
