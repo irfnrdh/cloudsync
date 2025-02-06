@@ -1,0 +1,4 @@
+[rclone]
+command=echo "☁ $(ls -1 ~/Cloud | wc -l) mounted" || echo "☁ 0 mounted"
+interval=30
+color=#81a1c1
