@@ -36,3 +36,7 @@ rclone ls gdrive1:  # Test koneksi
 sudo usermod -aG fuse $USER
 rclone rc core/stats
 ```
+
+
+### Alternatif 
+- [Rclone Browser](https://github.com/kapitainsky/RcloneBrowser)
