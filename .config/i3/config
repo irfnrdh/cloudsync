@@ -1,1 +1,2 @@
 bindsym $mod+Shift+g exec --no-startup-id /path/to/mount_manager.sh
+bindsym $mod+Mod1+g exec --no-startup-id ~/.local/bin/rofi-cloudsync
