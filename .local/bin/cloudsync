@@ -1,0 +1,44 @@
+#!/bin/bash
+# Dependencies: zenity, rclone, fuse, notify-send
+
+MOUNT_DIR="$HOME/Cloud"
+CONFIG_FILE="$HOME/.config/rclone-manager.conf"
+
+# Buat config file jika belum ada
+[ ! -f "$CONFIG_FILE" ] && printf "gdrive1\n~/Cloud/gdrive1\ngdrive2\n~/Cloud/gdrive2" > "$CONFIG_FILE"
+
+show_menu() {
+  ACTION=$(zenity --list --radiolist \
+    --title="Google Drive Manager" \
+    --text="Pilih aksi:" \
+    --column="Pick" --column="Action" \
+    TRUE "Mount" FALSE "Unmount" FALSE "Buka Folder" --height=180)
+  
+  REMOTES=($(awk 'NR%2' "$CONFIG_FILE"))
+  PATHS=($(awk 'NR%2==0' "$CONFIG_FILE"))
+  
+  SELECTION=$(zenity --list --title="Pilih Akun" --column="Account" "${REMOTES[@]}")
+  
+  for i in "${!REMOTES[@]}"; do
+    if [ "${REMOTES[$i]}" = "$SELECTION" ]; then
+      REMOTE="${REMOTES[$i]}"
+      MOUNT_PATH="${PATHS[$i]}"
+    fi
+  done
+
+  case "$ACTION" in
+    "Mount")
+      rclone mount --vfs-cache-mode full --daemon "$REMOTE": "$MOUNT_PATH"
+      notify-send -i cloud "Google Drive" "$REMOTE berhasil dimount!"
+      ;;
+    "Unmount")
+      fusermount -uz "$MOUNT_PATH"
+      notify-send -i cloud-off "Google Drive" "$REMOTE berhasil diunmount!"
+      ;;
+    "Buka Folder")
+      xdg-open "$MOUNT_PATH"
+      ;;
+  esac
+}
+
+show_menu
