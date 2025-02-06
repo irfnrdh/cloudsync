@@ -1,5 +1,5 @@
 # cloudsync
-Based RClone for Linux
+Based RClone for Linux Manjaro i3wm
 
 
 ## Setup
