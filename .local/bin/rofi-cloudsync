@@ -1,0 +1,14 @@
+#!/bin/bash
+echo -e " Mount All\n Unmount All\n Open Cloud Folder" | rofi -dmenu -p "Cloudsync" | while read CHOICE; do
+  case $CHOICE in
+    " Mount All") 
+      systemctl --user start cloudsync@*
+      ;;
+    " Unmount All")
+      systemctl --user stop cloudsync@*
+      ;;
+    " Open Cloud Folder")
+      xdg-open "$HOME/Cloud"
+      ;;
+  esac
+done
